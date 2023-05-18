@@ -19,15 +19,20 @@ FROM
 INNER JOIN 
     PCPs pcp ON p.PCPs_pcp_id = pcp.pcp_id; 
 
---Page to look at all PCPs
+--Page to look at all PCP columns and Location Name column 
 
 SELECT
-    pcp_id, 
-    first_name, 
-    last_name, 
-    pcp_specialty 
+    p.pcp_id, 
+    p.first_name, 
+    p.last_name, 
+    p.pcp_specialty, 
+    l.location_name
 FROM 
-    PCPs; 
+    PCPs p
+INNER JOIN 
+    PCPs_Locations pl ON p.pcp_id=pl.PCPs_pcp_id
+INNER JOIN 
+    locations l ON  pl.Locations_location_id = l.location_id; 
 
 --see all of the locations in the system 
 
