@@ -1,0 +1,41 @@
+<html>
+<head>
+<title>Primary Care Organizer</title>
+</head>
+
+<body>
+  <nav>
+    <ul>
+        <li><a href="index.html">Home</a></li>
+        <li><a href="patients.html">Patients</a></li>
+        <li><a href="pcps.html">PCPs</a></li>
+        <li><a href="visits.html">Visits</a></li>
+    </ul>
+  </nav>
+<h1>PCP Location Info</h1>
+
+<table border="3" cellpadding="5">
+  <tr>
+    <th>PCP ID</th>
+    <th>First Name</th>
+    <th>Last Name</th>
+    <th>PCP Specialty</th>
+  </tr>
+</table>
+<p>&nbsp;</p>
+</div> 
+<div id="insert" style="display: block">
+    <form id="addPCP">
+        <legend><strong>Add PCP</strong></legend>
+          <fieldset class="fields">
+            <label> PCP ID </label> <input type="text" name="firstName">
+            <label> First Name </label> <input type="text" name="lastName">
+            <label> Last Name </label> <input type="text" name="dateOfBirth">
+            <label> PCP Specialty </label> <input type="text" name="sex">
+          </fieldset>
+          <input class="btn" type="submit" id="addPCP" value="Add a PCP">
+          <input class="btn" type="button" value="Delete a PCP">
+	</form> 
+</div>
+</body>
+</html>
