@@ -1,12 +1,12 @@
 from flask import Flask, render_template, json
 import os
-import database.db_connector as db
+# import database.db_connector as db
 
 # Configuration
 
 app = Flask(__name__, template_folder='htmls')
 
-db_connection = db.connect_to_database()
+# db_connection = db.connect_to_database()
 
 @app.route('/')
 def home():
