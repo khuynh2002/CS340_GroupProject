@@ -20,7 +20,7 @@ mysql = MySQL(app)
 
 @app.route('/')
 def home():
-    return render_template('main.j2')
+    return render_template('index.html')
 
 @app.route('/locations')
 def page1():
