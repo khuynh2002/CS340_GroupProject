@@ -1,5 +1,5 @@
 from flask import Flask, render_template, json, redirect
-from flask_mysqldb import MySQL
+# from flask_mysqldb import MySQL
 from flask import request
 import os
 import database.db_connector as db
@@ -8,18 +8,18 @@ import database.db_connector as db
 
 app = Flask(__name__, template_folder='htmls')
 
-app.config['MYSQL_HOST'] = 'classmysql.engr.oregonstate.edu'
-app.config['MYSQL_USER'] = 'cs340_palsa'
-app.config['MYSQL_PASSWORD'] = '5384' #last 4 of onid
-app.config['MYSQL_DB'] = 'cs340_palsa'
-app.config['MYSQL_CURSORCLASS'] = "DictCursor"
+# app.config['MYSQL_HOST'] = 'classmysql.engr.oregonstate.edu'
+# app.config['MYSQL_USER'] = 'cs340_palsa'
+# app.config['MYSQL_PASSWORD'] = '5384' #last 4 of onid
+# app.config['MYSQL_DB'] = 'cs340_palsa'
+# app.config['MYSQL_CURSORCLASS'] = "DictCursor"
 
-mysql = MySQL(app)
+# mysql = MySQL(app)
 db_connection = db.connect_to_database()
 
 @app.route('/')
 def home():
-    return render_template('index.html')
+    return render_template('main.j2')
 
 @app.route('/locations')
 def page1():
@@ -28,9 +28,6 @@ def page1():
 @app.route('/patients')
 def page2():
     return render_template('patients.html')
-
-class PCP():
-    id = mysql.Column(mysql.Integer, primary_key=True)
 
 
 @app.route('/pcps', methods=['GET', 'POST'])
