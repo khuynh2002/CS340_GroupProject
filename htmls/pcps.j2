@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>PCPs</title>
+</head>
+<body>
+    <h1>Primary Care Providers</h1>
+    
+    <h2>Add New PCP</h2>
+    <form method="POST">
+        <label for="first_name">First Name:</label>
+        <input type="text" id="first_name" name="first_name">
+        <br>
+        <label for="last_name">Last Name:</label>
+        <input type="text" id="last_name" name="last_name">
+        <br>
+        <label for="pcp_specialty">Specialty:</label>
+        <input type="text" id="pcp_specialty" name="pcp_specialty">
+        <br>
+        <input type="submit" value="Add PCP">
+    </form>
+
+    <h2>List of PCPs</h2>
+    <ul>
+        {% for pcp in pcps %}
+            <li>
+                <a href="{{ url_for('pcp', pcp_id=pcp.pcp_id) }}">
+                    {{ pcp.first_name }} {{ pcp.last_name }} - {{ pcp.pcp_specialty }}
+                </a>
+            </li>
+        {% endfor %}
+    </ul>
+</body>
+</html>
