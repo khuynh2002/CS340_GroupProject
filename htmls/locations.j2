@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>locations</title>
+    <style>
+        .tab {
+            padding: 10px;
+            margin: 5px;
+            background-color: #f2f2f2;
+            border: 1px solid #ddd;
+            cursor: pointer;
+            text-decoration: none;
+            color: black;
+        }
+
+        .tab:hover {
+            background-color: #ddd;
+        }
+    </style>
+</head>
+<body>
+    <h1>Locations</h1>
+    
+    <h2>Add New Location</h2>
+    <form method="POST">
+    <legend><strong>Add Location</strong></legend>
+        <fieldset class="fields">
+        <label for="location_name">Location Name:</label>
+        <input type="text" id="location_name" name="location_name">
+        <br>
+        <label for="location_city">City:</label>
+        <input type="text" id="location_city" name="location_city">
+        <br>
+        <label for="location_state">State:</label>
+        <input type="text" id="location_state" name="location_state">
+        <br>
+        <label for="location_zip">Zip:</label>
+        <input type="text" id="location_zip" name="location_zip">
+        <br>
+        </fieldset>
+        <input type="submit" value="Add Location">
+    </form>
+
+    <h2>List of locations</h2>
+<table border="3" cellpadding="5">
+<thead>
+<tr>
+    <!-- Iterate through each key in the first entry to get the
+    column name -->
+    {% for key in locations[0].keys() %}
+
+    <!-- Create a <th> tag with the key inside of it, this will be
+    our header row -->
+    <th>{{ key }}</th>
+
+    <!-- End of this for loop -->
+    {% endfor %}
+    <th> EDIT </th>
+    <th> DELETE </th>
+</tr>
+<tbody>
+
+<!-- Now, iterate through every person in locations -->
+{% for person in locations %}
+<tr>
+    <!-- Then iterate through every key in the current person dictionary -->
+    {% for key in person.keys() %}
+
+    <!-- Create a <td> element with the value of that key in it -->
+    <td>{{person[key]}}</td>
+    {% endfor %}
+    <td><a href="/locations/{{person.location_id}}" class="btn btn-default">EDIT</a></td>
+    <td><a href="/delete_location/{{person.location_id}}" class="btn btn-default">DELETE</a></td>
+</tr>
+{% endfor %}
+</table>
+</body>
+</html>

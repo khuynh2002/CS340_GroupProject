@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>{{ location.location_name }} {{ location.location_city }}</title>
+</head>
+<body>
+    <h1>{{ location.location_name }}</h1>
+
+    <h2>Update PCP</h2>
+    <form method="POST">
+        <label for="location_name">location_name:</label>
+        <input type="text" id="location_name" name="location_name" value="{{ location.location_name }}">
+        <br>
+        <label for="location_city">City:</label>
+        <input type="text" id="location_city" name="location_city" value="{{ location.location_city }}">
+        <br>
+        <label for="location_state">State:</label>
+        <input type="text" id="location_state" name="location_state" value="{{ location.location_state }}">
+        <br>
+        <label for="location_zip">Zip:</label>
+        <input type="text" id="location_zip" name="location_zip" value="{{ location.location_zip }}">
+        <br>
+        <input type="submit" value="Update Location">
+    </form>
