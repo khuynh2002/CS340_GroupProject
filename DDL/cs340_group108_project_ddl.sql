@@ -40,12 +40,13 @@ CREATE TABLE IF NOT EXISTS `Patients` (
   `gender` VARCHAR(45) NULL,
   `PCPs_pcp_id` INT NOT NULL,
   PRIMARY KEY (`patient_id`, `PCPs_pcp_id`),
-  INDEX `fk_Patients_PCPs1_idx` (`PCPs_pcp_id` ASC),
-  CONSTRAINT `fk_Patients_PCPs1`
-    FOREIGN KEY (`PCPs_pcp_id`)
-    REFERENCES `PCPs` (`pcp_id`)
-    ON DELETE SET NULL
-    ON UPDATE CASCADE)
+  INDEX `fk_Patients_PCPs1_idx` (`PCPs_pcp_id` ASC)
+  -- CONSTRAINT `fk_Patients_PCPs1`
+  --   FOREIGN KEY (`PCPs_pcp_id`)
+  --   REFERENCES `PCPs` (`pcp_id`)
+  --   ON DELETE SET NULL
+  --   ON UPDATE CASCADE
+    )
 ENGINE = InnoDB;
 
 INSERT INTO `Patients` (first_name, last_name, date_of_birth, sex, gender, PCPs_pcp_id)
@@ -101,17 +102,18 @@ CREATE TABLE IF NOT EXISTS `Visits` (
   `Locations_location_id` INT NOT NULL,
   PRIMARY KEY (`visit_id`, `Patients_patient_id`, `Patients_PCPs_pcp_id`, `Locations_location_id`),
   INDEX `fk_Visits_Patients1_idx` (`Patients_patient_id` ASC, `Patients_PCPs_pcp_id` ASC),
-  INDEX `fk_Visits_Locations1_idx` (`Locations_location_id` ASC),
-  CONSTRAINT `fk_Visits_Patients1`
-    FOREIGN KEY (`Patients_patient_id` , `Patients_PCPs_pcp_id`)
-    REFERENCES `Patients` (`patient_id` , `PCPs_pcp_id`)
-    ON DELETE SET NULL
-    ON UPDATE CASCADE,
-  CONSTRAINT `fk_Visits_Locations1`
-    FOREIGN KEY (`Locations_location_id`)
-    REFERENCES `Locations` (`location_id`)
-    ON DELETE SET NULL
-    ON UPDATE CASCADE)
+  INDEX `fk_Visits_Locations1_idx` (`Locations_location_id` ASC)
+  -- CONSTRAINT `fk_Visits_Patients1`
+  --   FOREIGN KEY (`Patients_patient_id` , `Patients_PCPs_pcp_id`)
+  --   REFERENCES `Patients` (`patient_id` , `PCPs_pcp_id`)
+  --   ON DELETE SET NULL
+  --   ON UPDATE CASCADE,
+  -- CONSTRAINT `fk_Visits_Locations1`
+  --   FOREIGN KEY (`Locations_location_id`)
+  --   REFERENCES `Locations` (`location_id`)
+  --   ON DELETE SET NULL
+  --   ON UPDATE CASCADE
+    )
 ENGINE = InnoDB;
 
 INSERT INTO `Visits` (visit_date, visit_length, diagnosis, med_prescribed, Patients_patient_id, Patients_PCPs_pcp_id, Locations_location_id)
@@ -137,17 +139,18 @@ CREATE TABLE IF NOT EXISTS `PCPs_Locations` (
   `Locations_location_id` INT NOT NULL,
   INDEX `fk_PCPs_has_Locations_Locations1_idx` (`Locations_location_id` ASC),
   INDEX `fk_PCPs_has_Locations_PCPs_idx` (`PCPs_pcp_id` ASC),
-  PRIMARY KEY (`pcp_locations_pk_id`),
-  CONSTRAINT `fk_PCPs_has_Locations_PCPs`
-    FOREIGN KEY (`PCPs_pcp_id`)
-    REFERENCES `PCPs` (`pcp_id`)
-    ON DELETE CASCADE
-    ON UPDATE CASCADE,
-  CONSTRAINT `fk_PCPs_has_Locations_Locations1`
-    FOREIGN KEY (`Locations_location_id`)
-    REFERENCES `Locations` (`location_id`)
-    ON DELETE CASCADE
-    ON UPDATE CASCADE)
+  PRIMARY KEY (`pcp_locations_pk_id`)
+  -- CONSTRAINT `fk_PCPs_has_Locations_PCPs`
+  --   FOREIGN KEY (`PCPs_pcp_id`)
+  --   REFERENCES `PCPs` (`pcp_id`)
+  --   ON DELETE CASCADE
+  --   ON UPDATE CASCADE,
+  -- CONSTRAINT `fk_PCPs_has_Locations_Locations1`
+  --   FOREIGN KEY (`Locations_location_id`)
+  --   REFERENCES `Locations` (`location_id`)
+  --   ON DELETE CASCADE
+  --   ON UPDATE CASCADE
+    )
 ENGINE = InnoDB;
 
 INSERT INTO `PCPs_Locations` (PCPs_pcp_id, Locations_location_id)

@@ -46,7 +46,20 @@ def pcps():
     query = "SELECT * FROM PCPs;"
     cursor = db.execute_query(db_connection=db_connection, query=query)
     results = cursor.fetchall()
-    return render_template("pcps.j2", pcps=results)
+    return render_template("pcps3.j2", pcps=results)
+
+@app.route('/delete_pcp/<int:pcp_id>', methods=['GET', 'POST'])
+def delete_pcp(pcp_id): 
+    query = "DELETE FROM PCPs WHERE pcp_id = %s;"
+    cursor = db.execute_query(db_connection=db_connection, query=query, query_params=(pcp_id,))
+    return redirect('/pcps')
+
+
+    # #sample code
+    # query = "SELECT * FROM PCPs;"
+    # cursor = db.execute_query(db_connection=db_connection, query=query)
+    # results = cursor.fetchall()
+    # return render_template("pcps3.j2", pcps=results)
 
 @app.route('/pcps/<int:pcp_id>', methods=['GET', 'POST', 'DELETE'])
 def pcp(pcp_id):
