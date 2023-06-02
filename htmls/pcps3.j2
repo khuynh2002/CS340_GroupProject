@@ -73,7 +73,7 @@
     <!-- Create a <td> element with the value of that key in it -->
     <td>{{person[key]}}</td>
     {% endfor %}
-    <td><a href="/" class="btn btn-default">EDIT</a></td>
+    <td><a href="/pcps/{{person.pcp_id}}" class="btn btn-default">EDIT</a></td>
     <td><a href="/delete_pcp/{{person.pcp_id}}" class="btn btn-default">DELETE</a></td>
 </tr>
 {% endfor %}
