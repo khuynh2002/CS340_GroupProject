@@ -1,9 +1,40 @@
+<!DOCTYPE html>
 <html>
 <head>
-    <title>OSU - CS 340 - Introduction to Databases - Flask Demo Project</title>
+    <title>Dashboard</title>
+    <style>
+        .tab {
+            padding: 10px;
+            margin: 5px;
+            background-color: #f2f2f2;
+            border: 1px solid #ddd;
+            cursor: pointer;
+            text-decoration: none;
+            color: black;
+        }
+
+        .tab:hover {
+            background-color: #ddd;
+        }
+
+        .header {
+            text-align: center;
+            font-size: 24px;
+            margin: 20px;
+        }
+    </style>
 </head>
 <body>
-    <h1>CS 340 - Introduction to Databases</h1>
-    <p>This is a demonstration project created to show students how to create a Flask app and connect it to a MySQL database.</p>
+    <div class="tabs">
+        <a href="patients" class="tab">Patients</a>
+        <a href="pcps" class="tab">PCPs</a>
+        <a href="visits" class="tab">Visits</a>
+    </div>
+    <div class="header">
+        Healthcare Organizer Application
+    </div>
 </body>
+
+
 </html>
+

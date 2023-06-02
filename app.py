@@ -44,10 +44,8 @@ def pcps():
     #sample code
     query = "SELECT * FROM PCPs;"
     cursor = db.execute_query(db_connection=db_connection, query=query)
-    #results = json.dumps(cursor.fetchall())
     results = cursor.fetchall()
-    #return results
-    return render_template("pcps3.j2", pcps=results)
+    return render_template("pcps.j2", pcps=results)
 
 @app.route('/pcps/<int:pcp_id>', methods=['GET', 'POST', 'DELETE'])
 def pcp(pcp_id):
