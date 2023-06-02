@@ -39,6 +39,7 @@ def pcps():
         
         query = "INSERT INTO PCPs (first_name, last_name, pcp_specialty) VALUES (%s, %s, %s);"
         db.execute_query(db_connection=db_connection, query=query, query_params=(first_name, last_name, pcp_specialty))
+        return redirect('/pcps')
 
 
     #sample code

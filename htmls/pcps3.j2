@@ -59,6 +59,8 @@
 
     <!-- End of this for loop -->
     {% endfor %}
+    <th> EDIT </th>
+    <th> DELETE </th>
 </tr>
 <tbody>
 
@@ -71,6 +73,8 @@
     <!-- Create a <td> element with the value of that key in it -->
     <td>{{person[key]}}</td>
     {% endfor %}
+    <td><button href="/"> Edit </button></td>
+    <td><button href="/"> Delete </button></td>
 </tr>
 {% endfor %}
 </table>
