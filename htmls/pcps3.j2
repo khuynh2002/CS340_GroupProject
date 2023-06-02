@@ -3,6 +3,21 @@
 <head>
     <meta charset="UTF-8">
     <title>PCPs</title>
+    <style>
+        .tab {
+            padding: 10px;
+            margin: 5px;
+            background-color: #f2f2f2;
+            border: 1px solid #ddd;
+            cursor: pointer;
+            text-decoration: none;
+            color: black;
+        }
+
+        .tab:hover {
+            background-color: #ddd;
+        }
+    </style>
 </head>
 <body>
     <h1>Primary Care Providers</h1>
@@ -31,14 +46,33 @@
     </form>
 
     <h2>List of PCPs</h2>
-    <ul>
-        {% for pcp in pcps %}
-            <li>
-                <a href="{{ url_for('pcp', pcp_id=pcp.pcp_id) }}">
-                    {{ pcp.first_name }} {{ pcp.last_name }} - {{ pcp.pcp_specialty }}
-                </a>
-            </li>
-        {% endfor %}
-    </ul>
+<table border="3" cellpadding="5">
+<thead>
+<tr>
+    <!-- Iterate through each key in the first entry to get the
+    column name -->
+    {% for key in pcps[0].keys() %}
+
+    <!-- Create a <th> tag with the key inside of it, this will be
+    our header row -->
+    <th>{{ key }}</th>
+
+    <!-- End of this for loop -->
+    {% endfor %}
+</tr>
+<tbody>
+
+<!-- Now, iterate through every person in pcps -->
+{% for person in pcps %}
+<tr>
+    <!-- Then iterate through every key in the current person dictionary -->
+    {% for key in person.keys() %}
+
+    <!-- Create a <td> element with the value of that key in it -->
+    <td>{{person[key]}}</td>
+    {% endfor %}
+</tr>
+{% endfor %}
+</table>
 </body>
 </html>
