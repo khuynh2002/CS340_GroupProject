@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>{{ patient.first_name }} {{ patient.last_name }}</title>
+</head>
+<body>
+<div class="tabs">
+        <a href="/" class="tab">Home</a> 
+        <a href="/patients" class="tab">Patients</a>
+        <a href="/pcps" class="tab">PCPs</a>
+        <a href="/visits" class="tab">Visits</a>
+        <a href="/locations" class="tab">Locations</a>
+    </div>
+    <h1>{{ patient.first_name }} {{ patient.last_name }}</h1>
+
+    <h2>Update Patient</h2>
+    <form method="POST">
+        <label for="first_name">First Name:</label>
+        <input type="text" id="first_name" name="first_name" value="{{ patient.first_name }}">
+        <br>
+        <label for="last_name">Last Name:</label>
+        <input type="text" id="last_name" name="last_name" value="{{ patient.last_name }}">
+        <br>
+        <label for="date_of_birth">Date of Birth:</label>
+        <input type="date" id="date_of_birth" name="date_of_birth" value="{{ patient.date_of_birth }}">
+        <br>
+        <label for="sex">Sex:</label>
+        <input type="text" id="sex" name="sex" value="{{ patient.sex }}">
+        <br>
+        <label for="gender">Gender:</label>
+        <input type="text" id="gender" name="gender" value="{{ patient.gender }}">
+        <br>
+        <label for="PCPs_pcp_id">PCP ID:</label>
+        <input type="number" id="PCPs_pcp_id" name="PCPs_pcp_id" value="{{ patient.PCPs_pcp_id }}">
+        <br>
+        <input type="submit" value="Update Patient">
+    </form>
+</body>
+</html>

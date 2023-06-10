@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Visit {{ visit.visit_id }}</title>
+</head>
+<body>
+<div class="tabs">
+        <a href="/" class="tab">Home</a> 
+        <a href="/patients" class="tab">Patients</a>
+        <a href="/pcps" class="tab">PCPs</a>
+        <a href="/visits" class="tab">Visits</a>
+        <a href="/locations" class="tab">Locations</a>
+    </div>
+    <h1>Visit {{ visit.visit_id }}</h1>
+
+    <h2>Update Visit</h2>
+    <form method="POST">
+        <label for="visit_date">Visit Date:</label>
+        <input type="date" id="visit_date" name="visit_date" value="{{ visit.visit_date }}">
+        <br>
+        <label for="visit_length">Visit Length:</label>
+        <input type="text" id="visit_length" name="visit_length" value="{{ visit.visit_length }}">
+        <br>
+        <label for="diagnosis">Diagnosis:</label>
+        <input type="text" id="diagnosis" name="diagnosis" value="{{ visit.diagnosis }}">
+        <br>
+        <label for="med_prescribed">Medicine Prescribed:</label>
+        <input type="text" id="med_prescribed" name="med_prescribed" value="{{ visit.med_prescribed }}">
+        <br>
+        <label for="Patients_patient_id">Patient ID:</label>
+        <input type="number" id="Patients_patient_id" name="Patients_patient_id" value="{{ visit.Patients_patient_id }}">
+        <br>
+        <label for="Patients_PCPs_pcp_id">PCP ID:</label>
+        <input type="number" id="Patients_PCPs_pcp_id" name="Patients_PCPs_pcp_id" value="{{ visit.Patients_PCPs_pcp_id }}">
+        <br>
+        <label for="Locations_location_id">Location ID:</label>
+        <input type="number" id="Locations_location_id" name="Locations_location_id" value="{{ visit.Locations_location_id }}">
+        <br>
+        <input type="submit" value="Update Visit">
+    </form>
+</body>
+</html>

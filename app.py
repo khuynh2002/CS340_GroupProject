@@ -21,10 +21,56 @@ db_connection = db.connect_to_database()
 def home():
     return render_template('main.j2')
 
-@app.route('/patients')
-def page2():
-    return render_template('patients.html')
+# @app.route('/patients')
+# def page2():
+#     return render_template('patients.html')
 
+@app.route('/patients', methods=['GET', 'POST'])
+def patients():
+    if request.method == 'POST':
+        first_name = request.form.get('first_name') 
+        last_name = request.form.get('last_name')
+        date_of_birth = request.form.get('date_of_birth')
+        sex = request.form.get('sex')
+        gender = request.form.get('gender')
+        PCPs_pcp_id = request.form.get('PCPs_pcp_id')
+        
+        query = "INSERT INTO Patients (first_name, last_name, date_of_birth, sex, gender, PCPs_pcp_id) VALUES (%s, %s, %s, %s, %s, %s);"
+        db.execute_query(db_connection=db_connection, query=query, query_params=(first_name, last_name, date_of_birth, sex, gender, PCPs_pcp_id))
+        return redirect('/patients')
+
+    query = "SELECT * FROM Patients;"
+    cursor = db.execute_query(db_connection=db_connection, query=query)
+    results = cursor.fetchall()
+    return render_template("patients.j2", patients=results)
+
+@app.route('/delete_patient/<int:patient_id>', methods=['GET', 'POST'])
+def delete_patient(patient_id): 
+    query = "DELETE FROM Patients WHERE patient_id = %s;"
+    cursor = db.execute_query(db_connection=db_connection, query=query, query_params=(patient_id,))
+    return redirect('/patients')
+
+@app.route('/patients/<int:patient_id>', methods=['GET', 'POST', 'DELETE'])
+def patient(patient_id):
+    if request.method == 'POST':
+        first_name = request.form.get('first_name') 
+        last_name = request.form.get('last_name')
+        date_of_birth = request.form.get('date_of_birth')
+        sex = request.form.get('sex')
+        gender = request.form.get('gender')
+        PCPs_pcp_id = request.form.get('PCPs_pcp_id')
+        
+        query = "UPDATE Patients SET first_name = %s, last_name = %s, date_of_birth = %s, sex = %s, gender = %s, PCPs_pcp_id = %s WHERE patient_id = %s;"
+        db.execute_query(db_connection=db_connection, query=query, query_params=(first_name, last_name, date_of_birth, sex, gender, PCPs_pcp_id, patient_id))
+
+    elif request.method == 'DELETE':
+        query = "DELETE FROM Patients WHERE patient_id = %s;"
+        db.execute_query(db_connection=db_connection, query=query, query_params=(patient_id,))
+        
+    query = "SELECT * FROM Patients WHERE patient_id = %s;"
+    cursor = db.execute_query(db_connection=db_connection, query=query, query_params=(patient_id,))
+    result = cursor.fetchone()
+    return render_template("patient.j2", patient=result)  # Render a specific template for individual patient
 
 @app.route('/pcps', methods=['GET', 'POST'])
 def pcps():
@@ -113,9 +159,57 @@ def location(location_id):
     result = cursor.fetchone()
     return render_template("locations2.j2", location=result) 
 
-@app.route('/visits.html')
-def page4():
-    return render_template('visits.html')
+# @app.route('/visits')
+# def page4():
+#     return render_template('visits.html')
+@app.route('/visits', methods=['GET', 'POST'])
+def visits():
+    if request.method == 'POST':
+        visit_date = request.form.get('visit_date') 
+        visit_length = request.form.get('visit_length')
+        diagnosis = request.form.get('diagnosis')
+        med_prescribed = request.form.get('med_prescribed')
+        Patients_patient_id = request.form.get('Patients_patient_id')
+        Patients_PCPs_pcp_id = request.form.get('Patients_PCPs_pcp_id')
+        Locations_location_id = request.form.get('Locations_location_id')
+        
+        query = "INSERT INTO Visits (visit_date, visit_length, diagnosis, med_prescribed, Patients_patient_id, Patients_PCPs_pcp_id, Locations_location_id) VALUES (%s, %s, %s, %s, %s, %s, %s);"
+        db.execute_query(db_connection=db_connection, query=query, query_params=(visit_date, visit_length, diagnosis, med_prescribed, Patients_patient_id, Patients_PCPs_pcp_id, Locations_location_id))
+        return redirect('/visits')
+    
+    query = "SELECT * FROM Visits;"
+    cursor = db.execute_query(db_connection=db_connection, query=query)
+    results = cursor.fetchall()
+    return render_template("visits.j2", visits=results)
+
+@app.route('/delete_visit/<int:visit_id>', methods=['GET', 'POST'])
+def delete_visit(visit_id): 
+    query = "DELETE FROM Visits WHERE visit_id = %s;"
+    cursor = db.execute_query(db_connection=db_connection, query=query, query_params=(visit_id,))
+    return redirect('/visits')
+
+@app.route('/visits/<int:visit_id>', methods=['GET', 'POST', 'DELETE'])
+def visit(visit_id):
+    if request.method == 'POST':
+        visit_date = request.form.get('visit_date') 
+        visit_length = request.form.get('visit_length')
+        diagnosis = request.form.get('diagnosis')
+        med_prescribed = request.form.get('med_prescribed')
+        Patients_patient_id = request.form.get('Patients_patient_id')
+        Patients_PCPs_pcp_id = request.form.get('Patients_PCPs_pcp_id')
+        Locations_location_id = request.form.get('Locations_location_id')
+        
+        query = "UPDATE Visits SET visit_date = %s, visit_length = %s, diagnosis = %s, med_prescribed = %s, Patients_patient_id = %s, Patients_PCPs_pcp_id = %s, Locations_location_id = %s WHERE visit_id = %s;"
+        db.execute_query(db_connection=db_connection, query=query, query_params=(visit_date, visit_length, diagnosis, med_prescribed, Patients_patient_id, Patients_PCPs_pcp_id, Locations_location_id, visit_id))
+
+    elif request.method == 'DELETE':
+        query = "DELETE FROM Visits WHERE visit_id = %s;"
+        db.execute_query(db_connection=db_connection, query=query, query_params=(visit_id,))
+        
+    query = "SELECT * FROM Visits WHERE visit_id = %s;"
+    cursor = db.execute_query(db_connection=db_connection, query=query, query_params=(visit_id,))
+    result = cursor.fetchone()
+    return render_template("visit.j2", visit=result)
 
 if __name__ == '__main__':
     port = int(os.environ.get('PORT', 9112))

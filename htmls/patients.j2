@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Patients</title>
+    <style>
+        .tab {
+            padding: 10px;
+            margin: 5px;
+            background-color: #f2f2f2;
+            border: 1px solid #ddd;
+            cursor: pointer;
+            text-decoration: none;
+            color: black;
+        }
+
+        .tab:hover {
+            background-color: #ddd;
+        }
+    </style>
+</head>
+<body>
+<div class="tabs">
+        <a href="/" class="tab">Home</a> 
+        <a href="/patients" class="tab">Patients</a>
+        <a href="/pcps" class="tab">PCPs</a>
+        <a href="/visits" class="tab">Visits</a>
+        <a href="/locations" class="tab">Locations</a>
+    </div>
+    <h1>Patients</h1>
+    
+    <h2>Add New Patient</h2>
+    <form method="POST">
+    <legend><strong>Add Patient</strong></legend>
+        <fieldset class="fields">
+        <label for="first_name">First Name:</label>
+        <input type="text" id="first_name" name="first_name">
+        <br>
+        <label for="last_name">Last Name:</label>
+        <input type="text" id="last_name" name="last_name">
+        <br>
+        <label for="date_of_birth">Date of Birth:</label>
+        <input type="date" id="date_of_birth" name="date_of_birth">
+        <br>
+        <label for="sex">Sex:</label>
+        <input type="text" id="sex" name="sex">
+        <br>
+        <label for="gender">Gender:</label>
+        <input type="text" id="gender" name="gender">
+        <br>
+        <label for="PCPs_pcp_id">PCP ID:</label>
+        <input type="number" id="PCPs_pcp_id" name="PCPs_pcp_id">
+        <br>
+        </fieldset>
+        <input type="submit" value="Add Patient">
+    </form>
+
+    <h2>List of Patients</h2>
+    <table border="3" cellpadding="5">
+    <thead>
+    <tr>
+        {% for key in patients[0].keys() %}
+            <th>{{ key }}</th>
+        {% endfor %}
+        <th>EDIT</th>
+        <th>DELETE</th>
+    </tr>
+    <tbody>
+        {% for patient in patients %}
+        <tr>
+            {% for key in patient.keys() %}
+                <td>{{patient[key]}}</td>
+            {% endfor %}
+            <td><a href="/patients/{{patient.patient_id}}" class="btn btn-default">EDIT</a></td>
+            <td><a href="/delete_patient/{{patient.patient_id}}" class="btn btn-default">DELETE</a></td>
+        </tr>
+        {% endfor %}
+    </table>
+</body>
+</html>

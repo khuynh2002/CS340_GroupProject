@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Visits</title>
+    <style>
+        .tab {
+            padding: 10px;
+            margin: 5px;
+            background-color: #f2f2f2;
+            border: 1px solid #ddd;
+            cursor: pointer;
+            text-decoration: none;
+            color: black;
+        }
+
+        .tab:hover {
+            background-color: #ddd;
+        }
+    </style>
+</head>
+<body>
+<div class="tabs">
+        <a href="/" class="tab">Home</a> 
+        <a href="/patients" class="tab">Patients</a>
+        <a href="/pcps" class="tab">PCPs</a>
+        <a href="/visits" class="tab">Visits</a>
+        <a href="/locations" class="tab">Locations</a>
+    </div>
+    <h1>Visits</h1>
+    
+    <h2>Add New Visit</h2>
+    <form method="POST">
+    <legend><strong>Add Visit</strong></legend>
+        <fieldset class="fields">
+        <label for="visit_date">Visit Date:</label>
+        <input type="date" id="visit_date" name="visit_date">
+        <br>
+        <label for="visit_length">Visit Length:</label>
+        <input type="text" id="visit_length" name="visit_length">
+        <br>
+        <label for="diagnosis">Diagnosis:</label>
+        <input type="text" id="diagnosis" name="diagnosis">
+        <br>
+        <label for="med_prescribed">Medicine Prescribed:</label>
+        <input type="text" id="med_prescribed" name="med_prescribed">
+        <br>
+        <label for="Patients_patient_id">Patient ID:</label>
+        <input type="number" id="Patients_patient_id" name="Patients_patient_id">
+        <br>
+        <label for="Patients_PCPs_pcp_id">PCP ID:</label>
+        <input type="number" id="Patients_PCPs_pcp_id" name="Patients_PCPs_pcp_id">
+        <br>
+        <label for="Locations_location_id">Location ID:</label>
+        <input type="number" id="Locations_location_id" name="Locations_location_id">
+        </fieldset>
+        <input type="submit" value="Add Visit">
+    </form>
+
+    <h2>List of Visits</h2>
+<table border="3" cellpadding="5">
+<thead>
+<tr>
+    <!-- Iterate through each key in the first entry to get the
+    column name -->
+    {% for key in visits[0].keys() %}
+
+    <!-- Create a <th> tag with the key inside of it, this will be
+    our header row -->
+    <th>{{ key }}</th>
+
+    <!-- End of this for loop -->
+    {% endfor %}
+    <th> EDIT </th>
+    <th> DELETE </th>
+</tr>
+<tbody>
+
+<!-- Now, iterate through every visit in visits -->
+{% for visit in visits %}
+<tr>
+    <!-- Then iterate through every key in the current visit dictionary -->
+    {% for key in visit.keys() %}
+
+    <!-- Create a <td> element with the value of that key in it -->
+    <td>{{visit[key]}}</td>
+    {% endfor %}
+    <td><a href="/visits/{{visit.visit_id}}" class="btn btn-default">EDIT</a></td>
+    <td><a href="/delete_visit/{{visit.visit_id}}" class="btn btn-default">DELETE</a></td>
+</tr>
+{% endfor %}
+</table>
+</body>
+</html>
