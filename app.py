@@ -129,7 +129,7 @@ def pcps_locations():
     query = "SELECT * FROM PCPs_Locations;"
     cursor = db.execute_query(db_connection=db_connection, query=query)
     results = cursor.fetchall()
-    return render_template("pcps_locations.j2", pcps_locations=results)
+    return render_template("pcp_locations.j2", pcps_locations=results)
 
 @app.route('/delete_pcp_location/<int:pcp_locations_pk_id>', methods=['GET', 'POST'])
 def delete_pcp_location(pcp_locations_pk_id): 
