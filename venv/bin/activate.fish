@@ -29,7 +29,7 @@ end
 # unset irrelevant variables
 deactivate nondestructive
 
-set -gx VIRTUAL_ENV "/nfs/stak/users/palsa/cs340/CS340_Group108/CS340_GroupProject/venv"
+set -gx VIRTUAL_ENV "/nfs/stak/users/palsa/cs340/GroupProjectFinal/CS340_GroupProject/venv"
 
 set -gx _OLD_VIRTUAL_PATH $PATH
 set -gx PATH "$VIRTUAL_ENV/bin" $PATH

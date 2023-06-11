@@ -47,14 +47,14 @@
     <table border="3" cellpadding="5">
     <thead>
     <tr>
-        {% for key in pcp_locations[0].keys() %}
+        {% for key in pcps_locations[0].keys() %}
             <th>{{ key }}</th>
         {% endfor %}
         <th>EDIT</th>
         <th>DELETE</th>
     </tr>
     <tbody>
-        {% for pcp_location in pcp_locations %}
+        {% for pcp_location in pcps_locations %}
         <tr>
             {% for key in pcp_location.keys() %}
                 <td>{{pcp_location[key]}}</td>
