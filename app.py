@@ -116,6 +116,45 @@ def pcp(pcp_id):
     result = cursor.fetchone()
     return render_template("pcp.j2", pcp=result)  # Render a specific template for individual PCP
 
+@app.route('/pcps_locations', methods=['GET', 'POST'])
+def pcps_locations():
+    if request.method == 'POST':
+        PCPs_pcp_id = request.form.get('PCPs_pcp_id')
+        Locations_location_id = request.form.get('Locations_location_id')
+        
+        query = "INSERT INTO PCPs_Locations (PCPs_pcp_id, Locations_location_id) VALUES (%s, %s);"
+        db.execute_query(db_connection=db_connection, query=query, query_params=(PCPs_pcp_id, Locations_location_id))
+        return redirect('/pcps_locations')
+
+    query = "SELECT * FROM PCPs_Locations;"
+    cursor = db.execute_query(db_connection=db_connection, query=query)
+    results = cursor.fetchall()
+    return render_template("pcps_locations.j2", pcps_locations=results)
+
+@app.route('/delete_pcp_location/<int:pcp_locations_pk_id>', methods=['GET', 'POST'])
+def delete_pcp_location(pcp_locations_pk_id): 
+    query = "DELETE FROM PCPs_Locations WHERE pcp_locations_pk_id = %s;"
+    cursor = db.execute_query(db_connection=db_connection, query=query, query_params=(pcp_locations_pk_id,))
+    return redirect('/pcps_locations')
+
+@app.route('/pcps_locations/<int:pcp_locations_pk_id>', methods=['GET', 'POST', 'DELETE'])
+def pcp_location(pcp_locations_pk_id):
+    if request.method == 'POST':
+        PCPs_pcp_id = request.form.get('PCPs_pcp_id')
+        Locations_location_id = request.form.get('Locations_location_id')
+        
+        query = "UPDATE PCPs_Locations SET PCPs_pcp_id = %s, Locations_location_id = %s WHERE pcp_locations_pk_id = %s;"
+        db.execute_query(db_connection=db_connection, query=query, query_params=(PCPs_pcp_id, Locations_location_id, pcp_locations_pk_id))
+
+    elif request.method == 'DELETE':
+        query = "DELETE FROM PCPs_Locations WHERE pcp_locations_pk_id = %s;"
+        db.execute_query(db_connection=db_connection, query=query, query_params=(pcp_locations_pk_id,))
+        
+    query = "SELECT * FROM PCPs_Locations WHERE pcp_locations_pk_id = %s;"
+    cursor = db.execute_query(db_connection=db_connection, query=query, query_params=(pcp_locations_pk_id,))
+    result = cursor.fetchone()
+    return render_template("pcp_location.j2", pcp_location=result)  # Render a specific template for individual PCP_Location
+
 @app.route('/locations', methods=['GET', 'POST'])
 def locations():
     if request.method == 'POST':
@@ -157,7 +196,7 @@ def location(location_id):
     query = "SELECT * FROM Locations WHERE location_id = %s;"
     cursor = db.execute_query(db_connection=db_connection, query=query, query_params=(location_id,))
     result = cursor.fetchone()
-    return render_template("locations2.j2", location=result) 
+    return render_template("location.j2", location=result) 
 
 # @app.route('/visits')
 # def page4():

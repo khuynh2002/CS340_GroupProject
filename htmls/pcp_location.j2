@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>PCP_Location {{ pcp_location.pcp_locations_pk_id }}</title>
+</head>
+<body>
+    <div class="tabs">
+        <a href="/" class="tab">Home</a> 
+        <a href="/patients" class="tab">Patients</a>
+        <a href="/pcps" class="tab">PCPs</a>
+        <a href="/visits" class="tab">Visits</a>
+        <a href="/locations" class="tab">Locations</a>
+    </div>
+    <h1>PCP_Location {{ pcp_location.pcp_locations_pk_id }}</h1>
+
+    <h2>Update PCP_Location</h2>
+    <form method="POST">
+        <label for="PCPs_pcp_id">PCP ID:</label>
+        <input type="number" id="PCPs_pcp_id" name="PCPs_pcp_id" value="{{ pcp_location.PCPs_pcp_id }}">
+        <br>
+        <label for="Locations_location_id">Location ID:</label>
+        <input type="number" id="Locations_location_id" name="Locations_location_id" value="{{ pcp_location.Locations_location_id }}">
+        <br>
+        <input type="submit" value="Update PCP_Location">
+    </form>
+</body>
+</html>
