@@ -60,7 +60,7 @@
             {% for key in pcp_location.keys() %}
                 <td>{{pcp_location[key]}}</td>
             {% endfor %}
-            <td><a href="/pcp_locations/{{pcp_location.pcp_locations_pk_id}}" class="btn btn-default">EDIT</a></td>
+            <td><a href="/pcps_locations/{{pcp_location.pcp_locations_pk_id}}" class="btn btn-default">EDIT</a></td>
             <td><a href="/delete_pcp_location/{{pcp_location.pcp_locations_pk_id}}" class="btn btn-default">DELETE</a></td>
         </tr>
         {% endfor %}
